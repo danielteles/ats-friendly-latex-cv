@@ -1,0 +1,15 @@
+WolfResume — ATS Parsing Test Report
+Source: pdf    Lines: 86    Chars: 5676
+Overall status: PASS
+Findings: 0 critical · 0 warn · 0 info
+
+── Diagnostics ───────────────────────────────
+── Recruiter scan (first 6 seconds) ──────────
+Signals visible: 5/5
+  ✓ Name visible in header
+  ✓ Email visible in first 6 lines
+  ✓ Portfolio / LinkedIn link visible
+  ✓ Recent role title visible
+  ✓ Quantified result visible in scan area
+
+Generated at https://wolfresume.com/parser-test
