@@ -1,0 +1,205 @@
+\documentclass[letterpaper,11pt]{article}
+
+% ==================== PACKAGES ====================
+\usepackage{cmap}          % load before fontenc: ensures correct copy/paste text extraction
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{lmodern}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Don't stretch inter-paragraph space to fill a short last page.
+\raggedbottom
+% Discourage a single orphan/widow line being stranded across a page break.
+\clubpenalty=10000
+\widowpenalty=10000
+
+% ==================== USER CONFIGURATION ====================
+% Single source of truth for the candidate name: reused in the header and in
+% the PDF metadata below, so it only needs to be edited in one place.
+\newcommand{\candidatename}{Mungo Underhill}
+
+\definecolor{accent}{HTML}{1F4E79}
+
+% Defined once so the document's vertical rhythm can be tuned from one place.
+\newlength{\cventrysep}\setlength{\cventrysep}{6pt}  % space between entries/sections
+\newlength{\cvblocksep}\setlength{\cvblocksep}{4pt}  % space between tightly related lines
+
+\usepackage[colorlinks=true,linkcolor=accent,urlcolor=accent]{hyperref}
+\hypersetup{
+  pdftitle={\candidatename\ -- Resume},
+  pdfauthor={\candidatename},
+  pdflang={en-US},
+  pdfdisplaydoctitle=true
+}
+
+% glyphtounicode covers ligatures (fi/fl/ffi) that cmap alone doesn't map
+% correctly to Unicode; \ifdefined guards engines where the primitive doesn't exist.
+\ifdefined\pdfgentounicode
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+\fi
+
+% ==================== SECTION HEADING FORMAT ====================
+\titleformat{\section}{
+  \raggedright\large\bfseries\color{accent}
+}{}{0em}{}[{\color{accent}\titlerule[0.8pt]}]
+\titlespacing{\section}{0pt}{10pt}{6pt}
+
+% Thin wrapper kept as a single macro so heading behavior (e.g. page-break
+% tuning) can be changed in one place instead of every \section call.
+\newcommand{\cvsection}[1]{\section{#1}}
+
+% ==================== BULLET POINT FORMAT ====================
+\setlist[itemize]{leftmargin=0.18in, labelsep=5pt, itemsep=2pt, parsep=0pt, topsep=3pt}
+
+\setlength{\parindent}{0pt}
+
+% ==================== ENTRY / SKILL MACROS ====================
+% \cventry{Role/Degree}{Company/Institution}{Location or status}{Dates}
+% Two plain paragraph lines (Role+Dates, Company+Location) instead of a
+% table: a long title wraps like normal text instead of corrupting PDF
+% reading order the way a table cell would. \nopagebreak discourages the
+% header from being split from its own second line or the bullets after it.
+\newcommand{\cventry}[4]{%
+  \noindent\normalsize\textbf{#1}\hfill\small\textbf{#4}\par
+  \nopagebreak[4]
+  \noindent\normalsize\textit{\textcolor{accent}{#2}}\hfill\small\textit{#3}\par
+  \nopagebreak[4]
+}
+
+% \keytech{keywords} -- dedicated keyword line for ATS matching.
+\newcommand{\keytech}[1]{\small\textbf{Key Technologies:} #1\par}
+
+% \skillrow{Category}{Comma-separated items} -- one plain-paragraph line per
+% category; add/remove rows freely without breaking alignment.
+\newcommand{\skillrow}[2]{\noindent\textbf{#1:} #2\par\vspace{2pt}}
+
+\begin{document}
+\pagestyle{empty}
+
+% ==================== HEADER / CONTACT INFO ====================
+% Avoid photo, age, marital status, or full street address -- not expected
+% (and sometimes a liability) on US/EU/international tech resumes.
+\begin{center}
+    {\huge\textbf{\candidatename}} \\ \vspace{2pt}
+    {\normalsize\color{accent}Senior Full-Stack Developer} \\ \vspace{4pt}
+    \small
+    % Two deliberate lines, not one auto-wrapping line: keeps every \href
+    % fully on one line so PDF text extraction order stays predictable.
+    Minas Tirith, Gondor \quad|\quad
+    \href{tel:+9995550142}{+999 555 0142} \quad|\quad
+    \href{mailto:mungo.underhill@example.com}{mungo.underhill@example.com} \\[3pt]
+    \href{https://www.linkedin.com/in/mungounderhill/}{linkedin.com/in/mungounderhill} \quad|\quad
+    \href{https://github.com/mungounderhill}{github.com/mungounderhill}
+\end{center}
+
+\vspace{\cvblocksep}
+
+% ==================== SUMMARY ====================
+\cvsection{Professional Summary}
+\small
+Senior Full-Stack Developer with 8+ years of experience designing and scaling web applications across the React, Vue.js, and Node.js ecosystems. Proven track record leading cross-functional engineering teams of up to 12, driving legacy-to-modern framework migrations, and pioneering cloud-native development workflows with containerized microservices and CI/CD automation. Experienced collaborating with distributed, cross-timezone teams on international projects; fluent in English and Spanish.
+
+\vspace{\cventrysep}
+
+% ==================== SKILLS ====================
+\cvsection{Skills}
+\small
+\skillrow{Languages \& Frameworks}{JavaScript, TypeScript, Node.js, Express, React, Vue.js, Svelte, Redux, Vuex, HTML5, SCSS, jQuery, React Native, Kotlin}
+\skillrow{Cloud \& DevOps}{AWS (Lambda), GCP, CI/CD, Git, RESTful APIs, MySQL, Android, Capacitor}
+\skillrow{Testing \& Quality}{Jest, Mocha, Unit Testing, Integration Testing}
+\skillrow{AI Engineering}{LLMs, Generative AI, Prompt Engineering, RAG, AI Agents, LangChain, OpenAI API, Vector Databases}
+\skillrow{Practices \& Methodologies}{Microservices, Distributed Systems, OOP, Agile, Scrum, Kanban, Full-Stack Development}
+\skillrow{Design Tools}{Figma, Sketch}
+\skillrow{Languages}{English, Spanish -- Professional working proficiency or above}
+
+\vspace{\cventrysep}
+
+% ==================== EXPERIENCE ====================
+\cvsection{Experience}
+
+\cventry{Senior Full-Stack Developer}{Northwind Logistics}{Edoras, Rohan}{01/2025 -- Present}
+\begin{itemize}\small
+    \item Spearheaded development of a scalable internal component library on React 19, leveraging Server Components, concurrent rendering, and modern state management.
+    \item Drove the multi-phase migration of a legacy jQuery application to modern React, coupled with a complete UI/UX design-system overhaul.
+    \item Architected an internationalization (i18n) strategy with react-i18next to support multi-language capabilities across the platform.
+    \item Scaled unit and integration testing frameworks with Jest and React Testing Library, raising codebase reliability and test coverage.
+    \item Pioneered a cloud-native development cycle with containerized microservices, building internal tooling and integrating CI/CD pipelines into the core engineering workflow.
+\end{itemize}
+\keytech{React 19, TypeScript, Server Components, react-i18next, Jest, React Testing Library, Docker, CI/CD}
+
+\vspace{\cventrysep}
+
+\cventry{Senior Full-Stack Developer}{Meridian Consulting}{Rivendell, Eriador}{09/2020 -- 01/2025}
+\begin{itemize}\small
+    \item Guided development of diverse applications across cross-functional teams of 5--12 engineers, occasionally overseeing multiple teams concurrently.
+    \item Increased platform usage by 25\% through strategic performance enhancements.
+    \item Mentored junior and senior professionals, contributing directly to their career progression.
+    \item Delivered unit testing training to junior professionals, strengthening team-wide testing proficiency. (2022)
+    \item Presented refined solutions directly to clients, emphasizing a commitment to delivering impactful, results-driven outcomes.
+    \item Served as a mediator in cross-functional discussions and facilitated communication with international counterparts, strengthening collaborative team dynamics.
+    \item Deployed applications to production multiple times, ensuring seamless transitions from development to live environments.
+    \item Optimized day-to-day engineering processes, improving workflow efficiency across teams.
+\end{itemize}
+\keytech{Agile/Scrum, Performance Optimization, Team Leadership, Mentorship, Client Delivery, Production Deployment, Cross-Timezone Collaboration}
+
+\vspace{\cventrysep}
+
+\cventry{Front-End Developer}{Meridian Consulting}{Rivendell, Eriador}{07/2018 -- 08/2020}
+\begin{itemize}\small
+    \item Drove development of entire epics spanning numerous features, reducing support ticket volume by 40\%.
+    \item Proposed solutions to enhance system performance, demonstrating a proactive approach to optimization.
+    \item Introduced development patterns that improved team efficiency and workflow.
+    \item Presented refined solutions to clients, emphasizing a commitment to high-quality, reliable outcomes.
+    \item Transitioned into a leadership role, guiding small teams and adapting quickly to new responsibilities.
+    \item Provided programming and JavaScript training to colleagues from diverse non-programming backgrounds, fostering cross-functional skill development. (2019)
+\end{itemize}
+\keytech{JavaScript, HTML5, SCSS, REST APIs, Performance Optimization, Training \& Mentorship}
+
+\vspace{\cventrysep}
+
+\cventry{Front-End Developer}{Cascade Softworks}{Bree, Eriador}{11/2017 -- 07/2018}
+\begin{itemize}\small
+    \item Led development of responsive frontend clients for fintech platforms across web and mobile.
+    \item Planned sprints and reported progress directly to the CEO.
+    \item Deployed applications to test environments using Node.js and GCP services, ensuring efficient validation.
+\end{itemize}
+\keytech{Node.js, GCP, Fintech, Sprint Planning}
+
+\vspace{\cventrysep}
+
+\cventry{Mobile Developer, Intern}{Harborview Digital}{Bree, Eriador}{08/2017 -- 12/2017}
+\begin{itemize}\small
+    \item Independently developed entire features while serving as an intern.
+    \item Provided direct progress reports to the project manager.
+\end{itemize}
+
+\vspace{\cventrysep}
+
+% ==================== EDUCATION ====================
+\cvsection{Education}
+
+\cventry{Postgraduate Degree in Applied Data Engineering}{Lonestar Institute of Technology}{In Progress}{02/2026 -- 02/2027}
+
+\vspace{\cvblocksep}
+
+\cventry{Bachelor of Software Engineering}{Coastal Union University}{Bree, Eriador}{02/2024 -- 12/2024}
+
+\vspace{\cvblocksep}
+
+\cventry{Bachelor of Software Engineering (Not Completed)}{Central State University}{Bree, Eriador}{10/2012 -- 07/2018}
+
+\vspace{\cventrysep}
+
+% ==================== CERTIFICATIONS ====================
+\cvsection{Certifications}
+\begin{itemize}\small
+    \item \textbf{iOS Developer Certificate} -- Apple Developer Academy \hfill 02/2015 -- 12/2015
+    \item \textbf{Android Developer Certificate} -- Google Developer Academy \hfill 01/2016 -- 06/2016
+\end{itemize}
+
+\end{document}
